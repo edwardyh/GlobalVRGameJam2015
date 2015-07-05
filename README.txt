@@ -1,0 +1,1 @@
+This repository is for Global VR Game Jam 2015.
