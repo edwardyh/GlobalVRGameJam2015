@@ -1,5 +1,8 @@
 This repository is for Global VR Game Jam 2015.
 
+The theme is:
+HUMAN COMPUTER INTERACTION
+
 The Google Cardboard SDK is included (imported) into the Assets folder.
 
 Two Git Tutorials are included in the repository as well:
