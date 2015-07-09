@@ -7,10 +7,10 @@ public class ItemManager : MonoBehaviour {
 	private List<Item> itemDataBase = new List<Item> ();
 	private Item newItem;
 	private Item inventory = null;
-	private static int r;
+	private int r;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		itemDataBase.Add (new Item ("Haste", Color.red));
 		itemDataBase.Add (new Item ("Slow", Color.green));
 		itemDataBase.Add (new Item ("Stun", Color.black));
@@ -18,7 +18,7 @@ public class ItemManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Cardboard.SDK.CardboardTriggered && inventory != null) {
+		if (Cardboard.SDK.Triggered && inventory != null) {
 			Debug.Log ("Use " + inventory.GetName() + "!");
 			SwitchItem(null);
 			Debug.Log ("Inventory now has " + GetInventoryName());
