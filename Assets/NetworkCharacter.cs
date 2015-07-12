@@ -13,7 +13,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (photonView.isMine) {
 			// Do nothing, character input is moving us
 		} else {
@@ -21,6 +21,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
 		}
 	}
+
 
 	public void OnPhotonSerializedView(PhotonStream stream, PhotonMessageInfo info){
 		if (stream.isWriting) {
