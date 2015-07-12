@@ -31,8 +31,8 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		} else {
 			// different player, we need to receive position as of a few milliseconds ago, 
 			//and update our version of that player
-			transform.position = (Vector3) stream.ReceiveNext();
-			transform.rotation = (UnityEngine.Quaternion) stream.ReceiveNext();
+			realPosition = (Vector3) stream.ReceiveNext();
+			realRotation = (UnityEngine.Quaternion) stream.ReceiveNext();
 			
 		}
 	}
