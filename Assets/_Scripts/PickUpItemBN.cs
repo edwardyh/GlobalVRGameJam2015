@@ -5,7 +5,7 @@ using System.Collections;
 public class PickUpItemBN : MonoBehaviour {
 	private GameObject gameManager;
 
-	public Canvas canvas;
+	private GameObject canvas;
 	public Image[] images;
 	public Sprite sprite;
 	private Collectable collectable;
@@ -14,6 +14,7 @@ public class PickUpItemBN : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.FindWithTag ("GameManager");
+		canvas = GameObject.FindGameObjectWithTag ("Canvas");
 	}
 	
 	// Update is called once per frame
