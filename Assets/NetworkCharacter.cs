@@ -5,6 +5,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;
+	bool getUpdate = false;
 
 
 	// Use this for initialization
@@ -24,6 +25,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 
 	public void OnPhotonSerializedView(PhotonStream stream, PhotonMessageInfo info){
+
 		if (stream.isWriting) {
 			// our player, send actual position to network
 			stream.SendNext(transform.position);
@@ -34,6 +36,12 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			realPosition = (Vector3) stream.ReceiveNext();
 			realRotation = (UnityEngine.Quaternion) stream.ReceiveNext();
 			
+		}
+
+		if (getUpdate == false) {
+			transform.position = realPosition;
+			transform.rotation = realRotation;
+			getUpdate = true;
 		}
 	}
 }
