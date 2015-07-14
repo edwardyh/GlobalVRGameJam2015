@@ -25,8 +25,8 @@ public class ItemBox : MonoBehaviour {
 		rend.material.SetColor("_Color", boxItem.GetColor());
 	}
 	
-	void OnCollisionEnter (Collision collision) {
-		if (collision.gameObject.name == "Player") {
+	void OnTriggerEnter(Collider other) {
+		if (other.name == "Player") {
 			//Destroy (gameObject);
 			itemManager.SwitchItem(boxItem);
 			Debug.Log ("Inventory now has " + itemManager.GetInventoryName());
