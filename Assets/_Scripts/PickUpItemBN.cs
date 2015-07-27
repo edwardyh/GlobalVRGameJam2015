@@ -35,7 +35,8 @@ public class PickUpItemBN : MonoBehaviour {
 		imageToPut2.sprite = collectable.sprite;
 		Renderer rend = collectable.GetComponent<Renderer> ();
 		Collider col = collectable.GetComponent<Collider> ();
-		rend.enabled = col.enabled = false;
+		 rend.enabled = false;
+		col.enabled = false;
 		collectable = null;
 	}
 
