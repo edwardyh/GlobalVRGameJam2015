@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ItemManager : MonoBehaviour
 {
-	private GameObject[] allFood;
+
 	private AutoWalk playerAutoWalk;
 	private List<NavMeshAgent> catMeshAgents;
 	private List<Item> itemDataBase;
@@ -123,14 +123,7 @@ public class ItemManager : MonoBehaviour
 	public void FoodCollected ()
 	{
 
-		if (foodRemaining > 1) {
-			GameObject[] allFood = GameObject.FindGameObjectsWithTag ("Food");
-			if (foodRemaining == 15) {
-				foreach (GameObject food in allFood) {
-					if (food)
-						food.transform.GetChild (5).gameObject.SetActive (true);
-				}
-			}
+		if (foodRemaining >= 1) {
 			foodRemaining -= 1;
 			Debug.Log ("A food is eaten, there are " + foodRemaining + " food in this game now.");
 		} else
