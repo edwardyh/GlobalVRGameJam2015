@@ -12,6 +12,7 @@ public class ItemManager : MonoBehaviour
 	private Item inventory = null;
 	private int r;
 	private int foodRemaining;
+	private	bool trigger = false;
 
 	// Use this for initialization
 	void Awake ()
@@ -84,7 +85,7 @@ public class ItemManager : MonoBehaviour
 		}
 		yield return new WaitForSeconds (10f);
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
-			catMeshAgent.speed = 2;
+			catMeshAgent.speed = 3.5f;
 		}
 		Debug.Log ("slow effect ends");
 	}
@@ -97,7 +98,7 @@ public class ItemManager : MonoBehaviour
 		}
 		yield return new WaitForSeconds (5f);
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
-			catMeshAgent.speed = 2;
+			catMeshAgent.speed = 3.5f;
 		}
 		Debug.Log ("stun effect ends");
 	}
@@ -125,15 +126,16 @@ public class ItemManager : MonoBehaviour
 
 		if (foodRemaining > 1) {
 			GameObject[] allFood = GameObject.FindGameObjectsWithTag ("Food");
-			if (foodRemaining == 15) {
+			if (foodRemaining < 15 && trigger == false) {
 				foreach (GameObject food in allFood) {
 					if (food)
 						food.transform.GetChild (5).gameObject.SetActive (true);
 				}
+				trigger = true;
 			}
 			foodRemaining -= 1;
 			Debug.Log ("A food is eaten, there are " + foodRemaining + " food in this game now.");
 		} else
-			Debug.Log ("No food left. Win condition reached!");
+			Application.LoadLevel ("Win");
 	}
 }
