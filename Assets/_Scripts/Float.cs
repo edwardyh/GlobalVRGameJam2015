@@ -4,9 +4,9 @@ using System.Collections;
 public class Float : MonoBehaviour
 {
 
-	public float floatHeight = 0.75f;
-	public float floatRange = 0.25f;
-	public float floatSpeed = 200f;
+	float floatHeight = 0.5f;
+	float floatRange = 0.25f;
+	float floatSpeed = 200f;
 
 	private float counter = 0f;
 	

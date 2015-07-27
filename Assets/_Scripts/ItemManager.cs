@@ -17,9 +17,9 @@ public class ItemManager : MonoBehaviour
 	void Awake ()
 	{
 		itemDataBase = new List<Item> ();
-		itemDataBase.Add (new Item ("Haste", Color.red));
-		itemDataBase.Add (new Item ("Slow", Color.green));
-		itemDataBase.Add (new Item ("Stun", Color.black));
+		itemDataBase.Add (new Item ("Haste", Color.red, 0));
+		itemDataBase.Add (new Item ("Slow", Color.green, 1));
+		itemDataBase.Add (new Item ("Stun", Color.black, 2));
 	}
 
 	void Start ()
@@ -99,7 +99,7 @@ public class ItemManager : MonoBehaviour
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
 			catMeshAgent.speed = 2;
 		}
-		Debug.Log ("slow effect ends");
+		Debug.Log ("stun effect ends");
 	}
 
 	public Item GenerateItem ()

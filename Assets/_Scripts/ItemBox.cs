@@ -8,6 +8,7 @@ public class ItemBox : MonoBehaviour
 	private int randomNum;
 	private Item boxItem;
 	private Item inventory;
+	public GameObject[] itemType;
 	private Renderer rend;
 	private Collider colli;
 
@@ -15,18 +16,16 @@ public class ItemBox : MonoBehaviour
 	void Start ()
 	{
 		itemManager = GameObject.Find ("ItemManager").GetComponent<ItemManager> ();
+		if (gameObject.transform.childCount > 0)
+			Destroy (gameObject.transform.GetChild (0).gameObject);
 		GenerateItem ();
 	}
 	void GenerateItem ()
 	{
 		boxItem = itemManager.GenerateItem ();
-		RenderBox ();
-	}
-
-	void RenderBox ()
-	{
-		rend = GetComponent<Renderer> ();
-		rend.material.SetColor ("_Color", boxItem.GetColor ());
+		GameObject newObject;
+		newObject = Instantiate (itemType [boxItem.GetNumber ()]) as GameObject;
+		newObject.transform.SetParent (gameObject.transform, false);
 	}
 	
 	void OnTriggerEnter (Collider other)
@@ -35,21 +34,18 @@ public class ItemBox : MonoBehaviour
 			//Destroy (gameObject);
 			itemManager.SwitchItem (boxItem);
 			Debug.Log ("Inventory now has " + itemManager.GetInventoryName ());
-			GenerateItem ();
-			StartCoroutine (HideUnhide (2f));
+			StartCoroutine (HideUnhide ());
 		}
 	}
 
-	IEnumerator HideUnhide (float time)
+	IEnumerator HideUnhide ()
 	{
-		while (true) {
-			colli = GetComponent<Collider> ();
-			colli.enabled = false;
-			rend.enabled = false;
-			yield return new WaitForSeconds (time);
-			colli.enabled = true;
-			rend.enabled = true;
-			break;
-		}
+		colli = GetComponent<Collider> ();
+		colli.enabled = false;
+		if (gameObject.transform.GetChild (0).gameObject != null)
+			Destroy (gameObject.transform.GetChild (0).gameObject);
+		yield return new WaitForSeconds (5.0f);
+		colli.enabled = true;
+		GenerateItem ();
 	}
 }
