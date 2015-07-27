@@ -25,7 +25,7 @@ public class ItemManager : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject[] allFood = GameObject.FindGameObjectsWithTag ("Food");
+		allFood = GameObject.FindGameObjectsWithTag ("Food");
 		foodRemaining = allFood.Length;
 		Debug.Log ("There are " + foodRemaining + " food in this game.");
 		if (playerAutoWalk == null)
@@ -125,7 +125,6 @@ public class ItemManager : MonoBehaviour
 	{
 
 		if (foodRemaining > 1) {
-			GameObject[] allFood = GameObject.FindGameObjectsWithTag ("Food");
 			if (foodRemaining < 15 && trigger == false) {
 				foreach (GameObject food in allFood) {
 					if (food)
