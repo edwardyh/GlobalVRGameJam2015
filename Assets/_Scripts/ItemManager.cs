@@ -12,7 +12,7 @@ public class ItemManager : MonoBehaviour
 	private Item newItem;
 	private Item inventory = null;
 	private int r;
-	private int foodRemaining;
+	private int foodRemaining = 52;
 	private	bool trigger = false;
 
 
