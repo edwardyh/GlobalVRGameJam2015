@@ -33,6 +33,7 @@ public class ItemBox : MonoBehaviour
 		if (other.name == "Player") {
 			//Destroy (gameObject);
 			itemManager.SwitchItem (boxItem);
+			itemManager.setItemUI(itemManager.GetInventoryName());
 			Debug.Log ("Inventory now has " + itemManager.GetInventoryName ());
 			StartCoroutine (HideUnhide ());
 		}

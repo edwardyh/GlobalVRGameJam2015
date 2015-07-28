@@ -7,6 +7,8 @@ public class GameManagerBN : MonoBehaviour {
 	public Collectable item;
 	public Sprite blankSprite;
 
+	public Sprite cheeseSprite, friesSprite, forkSprite;
+
 	private Canvas canvas;
 
 	// Use this for initialization
@@ -25,8 +27,9 @@ public class GameManagerBN : MonoBehaviour {
 
 	public void useItem(){
 		if (item != null) {
+			Debug.Log("UseItemandSwitch");
 			useItemAndSwitch();
-			GameObject.Destroy(item.gameObject);
+			//GameObject.Destroy(item.gameObject);
 		}
 	}
 

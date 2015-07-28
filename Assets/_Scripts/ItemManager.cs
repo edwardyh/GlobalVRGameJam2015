@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class ItemManager : MonoBehaviour
@@ -14,6 +15,17 @@ public class ItemManager : MonoBehaviour
 	private int foodRemaining;
 	private	bool trigger = false;
 
+
+	public Collectable item;
+	public Sprite blankSprite;
+	
+	public Sprite cheeseSprite, friesSprite, forkSprite;
+	private GameObject canvas;
+	private Image[] images;
+
+	public Text text0;
+	public Text text1;
+
 	// Use this for initialization
 	void Awake ()
 	{
@@ -21,6 +33,8 @@ public class ItemManager : MonoBehaviour
 		itemDataBase.Add (new Item ("Haste", Color.red, 0));
 		itemDataBase.Add (new Item ("Slow", Color.green, 1));
 		itemDataBase.Add (new Item ("Stun", Color.black, 2));
+
+		canvas = GameObject.FindGameObjectWithTag ("Canvas");
 	}
 
 	void Start ()
@@ -47,6 +61,7 @@ public class ItemManager : MonoBehaviour
 			SwitchItem (null);
 			Debug.Log ("Inventory now has " + GetInventoryName ());
 		}
+		text1.text = text0.text = "Food: " +foodRemaining;
 	}
 
 	private void UseItem (string itemName)
@@ -70,6 +85,7 @@ public class ItemManager : MonoBehaviour
 	private IEnumerator UseHaste ()
 	{
 		Debug.Log ("using haste");
+		useItemAndSwitch ();
 		float defaultSpeed = playerAutoWalk.speed;
 		playerAutoWalk.speed = defaultSpeed * 2;
 		yield return new WaitForSeconds (5f);
@@ -80,6 +96,7 @@ public class ItemManager : MonoBehaviour
 	private IEnumerator UseSlow ()
 	{
 		Debug.Log ("using slow");
+		useItemAndSwitch();
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
 			catMeshAgent.speed = 0.5f;
 		}
@@ -93,6 +110,7 @@ public class ItemManager : MonoBehaviour
 	private IEnumerator UseStun ()
 	{
 		Debug.Log ("using stun");
+		useItemAndSwitch ();
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
 			catMeshAgent.speed = 0;
 		}
@@ -137,4 +155,43 @@ public class ItemManager : MonoBehaviour
 		} else
 			Application.LoadLevel ("Win");
 	}
+
+
+
+	public void setItem(Collectable colItem){
+		item = colItem;
+	}
+
+	public void useItem(){
+
+	}
+	
+	public void useItemAndSwitch(){
+		Image[] images = canvas.GetComponentsInChildren<Image> ();
+		Image imgToChange = images [0];
+		Image imgToChange2 = images [1];
+		imgToChange.sprite = blankSprite;
+		imgToChange2.sprite = blankSprite;
+	}
+
+	public void setItemUI(string imageType){
+		images = canvas.GetComponentsInChildren<Image> ();
+		Image imageToPut = images [0];
+		Image imageToPut2 = images [1];
+		imageToPut.sprite = imageToPut2.sprite =  getCorrectSprite(GetInventoryName());
+	}
+
+	Sprite getCorrectSprite(string spriteType){
+		Debug.Log ("SPRITE TYPE: " + spriteType);
+		if (spriteType == "Haste")
+			return cheeseSprite;
+		if (spriteType == "Slow")
+			return friesSprite;
+		if (spriteType == "Stun")
+			return forkSprite;
+		else
+			return blankSprite;
+	}
+
+
 }

@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour {
 			delay = Time.time + howLongToLook;
 		}
 		
-		if ((Cardboard.SDK.CardboardTriggered && isLookedAt) || (Time.time>delay && isLookedAt) ) {
+		if ((Cardboard.SDK.Triggered && isLookedAt) || (Time.time>delay && isLookedAt) ) {
 			// Do Stuff black if looked at for now
 			GetComponent<Renderer>().material.color = isLookedAt ? Color.black : Color.red;
 			//startButton = GameObject.FindGameObjectWithTag("Start");

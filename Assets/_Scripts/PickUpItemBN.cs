@@ -26,22 +26,22 @@ public class PickUpItemBN : MonoBehaviour {
 	}
 
 	void PickUpItem(){
-		gameManager.GetComponent<GameManagerBN> ().setItem (collectable);
+		gameManager.GetComponent<ItemManager> ().setItem (collectable);
 		hasItem = true;
 		images = canvas.GetComponentsInChildren<Image> ();
 		Image imageToPut = images [0];
 		Image imageToPut2 = images [1];
-		imageToPut.sprite = collectable.sprite;
-		imageToPut2.sprite = collectable.sprite;
-		Renderer rend = collectable.GetComponent<Renderer> ();
-		Collider col = collectable.GetComponent<Collider> ();
-		 rend.enabled = false;
-		col.enabled = false;
+		imageToPut.sprite = imageToPut2.sprite =  getCorrectSprite(collectable.itemType);
+		//Renderer rend = collectable.GetComponent<Renderer> ();
+		//Collider col = collectable.GetComponent<Collider> ();
+		// rend.enabled = false;
+		//col.enabled = false;
+		//GameObject.DestroyObject (collectable);
 		collectable = null;
 	}
 
 	void UseItem(){
-		gameObject.GetComponent<GameManagerBN> ().useItem();
+		gameObject.GetComponent<ItemManager> ().useItem();
 		hasItem = false;
 	}
 
@@ -62,5 +62,17 @@ public class PickUpItemBN : MonoBehaviour {
 			// is this okay?
 			collectable = null;
 		}
+	}
+
+	Sprite getCorrectSprite(string spriteType){
+		Debug.Log ("SPRITE TYPE: " + spriteType);
+		if (spriteType == "cheeseSprite")
+			return gameManager.GetComponent<ItemManager>().cheeseSprite;
+		if (spriteType == "friesSprite")
+			return gameManager.GetComponent<ItemManager>().friesSprite;
+		if (spriteType == "forkSprite")
+			return gameManager.GetComponent<ItemManager> ().forkSprite;
+		else
+			return gameManager.GetComponent<ItemManager> ().blankSprite;
 	}
 }

@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Collectable : MonoBehaviour {
-
-	public Sprite sprite;
+	
+	public string itemType;
 
 	// Use this for initialization
 	void Start () {
