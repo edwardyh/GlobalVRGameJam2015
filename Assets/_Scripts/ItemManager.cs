@@ -61,7 +61,7 @@ public class ItemManager : MonoBehaviour
 			SwitchItem (null);
 			Debug.Log ("Inventory now has " + GetInventoryName ());
 		}
-		text1.text = text0.text = "Food: " +foodRemaining;
+		text1.text = text0.text = "Food: " + foodRemaining;
 	}
 
 	private void UseItem (string itemName)
@@ -96,13 +96,13 @@ public class ItemManager : MonoBehaviour
 	private IEnumerator UseSlow ()
 	{
 		Debug.Log ("using slow");
-		useItemAndSwitch();
+		useItemAndSwitch ();
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
 			catMeshAgent.speed = 0.5f;
 		}
 		yield return new WaitForSeconds (10f);
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
-			catMeshAgent.speed = 3.5f;
+			catMeshAgent.speed = 1.5f;
 		}
 		Debug.Log ("slow effect ends");
 	}
@@ -116,7 +116,7 @@ public class ItemManager : MonoBehaviour
 		}
 		yield return new WaitForSeconds (5f);
 		foreach (NavMeshAgent catMeshAgent in catMeshAgents) {
-			catMeshAgent.speed = 3.5f;
+			catMeshAgent.speed = 1.5f;
 		}
 		Debug.Log ("stun effect ends");
 	}
@@ -158,15 +158,18 @@ public class ItemManager : MonoBehaviour
 
 
 
-	public void setItem(Collectable colItem){
+	public void setItem (Collectable colItem)
+	{
 		item = colItem;
 	}
 
-	public void useItem(){
+	public void useItem ()
+	{
 
 	}
 	
-	public void useItemAndSwitch(){
+	public void useItemAndSwitch ()
+	{
 		Image[] images = canvas.GetComponentsInChildren<Image> ();
 		Image imgToChange = images [0];
 		Image imgToChange2 = images [1];
@@ -174,14 +177,16 @@ public class ItemManager : MonoBehaviour
 		imgToChange2.sprite = blankSprite;
 	}
 
-	public void setItemUI(string imageType){
+	public void setItemUI (string imageType)
+	{
 		images = canvas.GetComponentsInChildren<Image> ();
 		Image imageToPut = images [0];
 		Image imageToPut2 = images [1];
-		imageToPut.sprite = imageToPut2.sprite =  getCorrectSprite(GetInventoryName());
+		imageToPut.sprite = imageToPut2.sprite = getCorrectSprite (GetInventoryName ());
 	}
 
-	Sprite getCorrectSprite(string spriteType){
+	Sprite getCorrectSprite (string spriteType)
+	{
 		Debug.Log ("SPRITE TYPE: " + spriteType);
 		if (spriteType == "Haste")
 			return cheeseSprite;
